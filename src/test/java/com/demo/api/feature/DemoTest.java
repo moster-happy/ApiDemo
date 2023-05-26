@@ -43,7 +43,7 @@ public class DemoTest extends BaseTest {
 //    }
 
     @Test
-    public void demoTest() {
+    public void demoBTVN() {
         // Create user
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
 
@@ -52,34 +52,14 @@ public class DemoTest extends BaseTest {
 
         String email = DataUtils.getData().getEmail();
         int password = DataUtils.getData().getPassword();
-        int id = DataUtils.getData().getId();
-
         resgristerRequest.setEmail(email);
         resgristerRequest.setPassword(password);
-        resgristerRequest.setId(id);
-        new ResgristerPage().getToken(resgristerRequest);
-
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setEmail(email);
-        loginRequest.setPassword(password);
-        String token =  new ResgristerPage().getTokenLogin(loginRequest);
-        int ID1 = loginRequest.getId();
-        System.out.println("ID1: " + ID1);
-
-        List<UserData> userList = resgristerService.getAllUser(token).getData();
-        for (UserData user : userList) {
-            System.out.println("userId: " + user.id);
-            System.out.println("userMail: " + user.email);
-        }
+        int ID1 = new ResgristerPage().getId(resgristerRequest);
 
         // Check user by id;
-        GetUserResponse user = resgristerService.getUser(token, ID1);
-        System.out.println("user: " + user);
+        resgristerService.getUser(token, ID1);
 
         // Delete user
         resgristerService.deleteUser(token, ID1);
-        // Check again after delete user
-        GetUserResponse user1 = resgristerService.getUser(token, ID1);
-        System.out.println("user1: " + user1);
     }
 }

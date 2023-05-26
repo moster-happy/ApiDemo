@@ -23,4 +23,9 @@ public class ResgristerPage {
         return resgristerResponseData.getToken();
     }
 
+    public  int getId(ResgristerRequestObject resgristerRequestObject){
+        ResgristerResponseObject resgristerResponse= resgristerService.postResgrister(resgristerRequestObject);
+        ResgristerResponseData resgristerResponseData = resgristerResponse.getData();
+        return resgristerResponseData.getId();
+    }
 }

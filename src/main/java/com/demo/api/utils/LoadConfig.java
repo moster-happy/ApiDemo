@@ -17,7 +17,7 @@ public class LoadConfig {
 
     public String getProperty(String key) {
         // Default environment is defined in pom.xml
-        String chosenEnv = "dev";
+        String chosenEnv = System.getProperty("environment");
         Config env = conf.getConfig(chosenEnv);
         return env.getString(key);
     }

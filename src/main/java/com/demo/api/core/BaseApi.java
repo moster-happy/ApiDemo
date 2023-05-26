@@ -32,14 +32,11 @@ public class BaseApi {
 
     }
 
-    protected RequestSpecification getRequestBuilder(String apiPath, String token, Map mapPost) {
-        System.out.println("apiPath: " + apiPath);
+    protected RequestSpecification getRequestBuilder(String apiPath, String token) {
         return RestAssured.given()
                 .relaxedHTTPSValidation()
                 .header("Authorization","Bearer "+ token)
                 .basePath(apiPath)
-//                .when()
-//                .body(mapPost)
                 .log().all();
     }
 

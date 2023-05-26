@@ -39,22 +39,15 @@ public class ResgristerService extends BaseApi {
     }
 
     public GetUserResponse getUser(String token, int userId) {
-        Map<String, Object> mapPost = new HashMap<>();
-//        String userID = Integer.toString(userId);
-        mapPost.put("id", userId);
-
         String basePath = DemoPath.GET_USER_BY_ID + userId;
-        RequestSpecification spec = getRequestBuilder(basePath, token, mapPost);
+        RequestSpecification spec = getRequestBuilder(basePath, token);
         Response response = this.dispatchServiceRequest(spec, Method.GET);
         return ObjectMapperUtils.convertJSONStringToDTOClassByGson(response.body().asString(), GetUserResponse.class);
     }
 
     public void deleteUser(String token, int userId) {
-        Map<String, Object> mapPost = new HashMap<>();
-        mapPost.put("id", userId);
-
         String basePath = DemoPath.DELETE_USER_BY_ID + userId;
-        RequestSpecification spec = getRequestBuilder(basePath, token, mapPost);
+        RequestSpecification spec = getRequestBuilder(basePath, token);
         this.dispatchServiceRequest(spec, Method.DELETE);
     }
 }
